@@ -19,8 +19,8 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc",
-    "lint": "tslint --project ./tsconfig.json -t stylish",
+    "build": "tsc --listEmittedFiles",
+    "lint": "eslint \"src/**/*.ts\"",
     "start:dev": "npm run build && node lib/index.js"
   },
   "dependencies": {

@@ -9,7 +9,6 @@ import {
 } from "matrix-bot-sdk";
 import * as path from "path";
 import config from "./config";
-import CommandHandler from "./commands/handler";
 
 // First things first: let's make the logs a bit prettier.
 LogService.setLogger(new RichConsoleLogger());
@@ -37,15 +36,6 @@ LogService.info("index", "Bot starting...");
 
     // Now create the client
     const client = new MatrixClient(config.homeserverUrl, config.accessToken, storage, cryptoStore);
-
-    // Setup the autojoin mixin (if enabled)
-    if (config.autoJoin) {
-        AutojoinRoomsMixin.setupOnClient(client);
-    }
-
-    // Prepare the command handler
-    const commands = new CommandHandler(client);
-    await commands.start();
 
     LogService.info("index", "Starting sync...");
     await client.start(); // This blocks until the bot is killed
